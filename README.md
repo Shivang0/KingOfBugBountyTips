@@ -194,7 +194,7 @@ httpx -ports 80,443,8009,8080,8081,8090,8180,8443 -l domain -timeout 5 -threads 
 > @Shivang0
 
 ```bash
-assetfinder --subs-only target.com | chaos -d target.com | finddomain -t target.com | httpx -mc 404 -thread 100 | jaeles scan -c 100 -s jaeles-signatures/sensitive/subdomain-takeover.yaml | tee target_sub_take.txt
+target=att.com;assetfinder --subs-only $target | chaos -d $target | finddomain -t $target | httpx -mc 404 | xargs -I@ -P3 sh -c 'jaeles -c 300 scan -s jaeles-signatures/sensative/subdomain-takeover.yaml -u @'| anew sub_tak"$target".txt 
 
 ```
 
