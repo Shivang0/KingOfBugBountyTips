@@ -324,6 +324,15 @@ httpx -l master.txt -silent -no-color -threads 300 -location 301,302 | awk '{pri
 findomain -t http://sony.com 2>/dev/null | httpx -silent | xargs -I@ sh -c 'ffuf -w path.txt -u @/FUZZ -t 100 -mc 200 -H "Content-Type: application/json"' 
 ```
 
+###  Search subdomains takeover using jaeles
+
+> @OFJAAAH
+> @Shivang0
+
+```bash
+assetfinder --subs-only target.com | chaos -d target.com | finddomain -t target.com | httpx -mc 404 -thread 100 | jaeles scan -c 100 -s jaeles-signatures/sensitive/subdomain-takeover.yaml | tee target_sub_take.txt
+
+```
 
 
 # Project
